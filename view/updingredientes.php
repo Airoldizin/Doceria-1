@@ -33,12 +33,21 @@
           <li><a href="#">Sair</a></li>
         </ul>
       </div>      <div class="conteudo">
-        <form action="#" method="post">
+          <form action="../controller/ingredienteBO.php" method="post">
+          <?php
+            include_once '../model/database/IngredienteDAO.php';
+                $dao = new IngredienteDAO();
+                $id = $_GET['idingredientes'];
+                $lista = $dao->list($id);
+            foreach ($lista as $value) {
+          ?>
           <label>Nome:</label>
-          <input type="text" name="txtnome"><br><br>
+          <input type="text" name="txtnome" value="<?php echo $value->descricao; ?>"><br><br>
           <input type="hidden" name="acao" value="alterar"/>
+          <input type="hidden" name="idingredientes" value="<?php echo $value->idingredientes; ?>" />
           <input type="submit" name="btnAlterar" value="Alterar"/>
           <input type="reset" name="btnLimpar" value="Limpar"/>
+            <?php } ?>
         </form>
       </div>
     </div>
