@@ -2,9 +2,9 @@
 include_once '../model/Ingrediente.php';
 include_once '../model/database/IngredienteDAO.php';
 
-if (isset($_POST['acao'])){
+if (isset($_REQUEST['acao'])){//verifica se o hidden chegou
 
-$acao = $_POST['acao'];
+$acao = $_REQUEST['acao'];//utiliza $POST e $GET
     
     switch ($acao) {
         case 'inserir':
@@ -40,19 +40,48 @@ $acao = $_POST['acao'];
             }
             break;
         case 'alterar':
-            $objeto = new Ingrediente();
-            $objeto->idingredientes = 6;
-            $objeto->descricao = 'Aveia';
-            if($dao->update($objeto)){
-                echo 'Ingrediente atualizado.';
-                echo '<hr/>';
+            if(isset($_POST['idingredientes']) && isset($_POST['txtnome']) && !empty($_POST['txtnome'])){
+                $dao = new IngredienteDAO();
+                $objeto = new Ingrediente();
+                $objeto->idingredientes = $_POST['idingredientes'];
+                $objeto->descricao = $_POST['txtnome'];
+                if($dao->update($objeto)){
+                    ?>
+                    <script type="text/javascript">
+                        alert('Ingrediente alterado com sucesso.');
+                        location.href = '../view/listaingredientes.php';
+                    </script>
+                    <?php
+                }else{
+                    ?>
+                    <script type="text/javascript">
+                        alert('Problema ao alterar ingrediente');
+                        history.go(-1);
+                    </script>
+                    <?php
+                }
             }
             break;
         case 'deletar':
-            $id = 6;
-            if($dao->delete($id)){
-                echo 'Registro apagado.';
-                echo '<hr/>';
+            if(isset($_GET['idingredientes'])){
+                $id = $_GET['idingredientes'];
+                $dao = new IngredienteDAO();
+
+                if($dao->delete($id)){
+                    ?>
+                    <script type="text/javascript">
+                        alert('Ingrediente excluído com sucesso.');
+                        location.href = '../view/listaingredientes.php';
+                    </script>
+                    <?php
+                }else{
+                    ?>
+                    <script type="text/javascript">
+                        alert('Problema ao excluir ingrediente');
+                        history.go(-1);
+                    </script>
+                    <?php
+                }
             }
             break;
         default:
