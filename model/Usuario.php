@@ -17,7 +17,7 @@ class Usuario {
     }
 
     public function autenticaUsuario($login, $senha) {
-        $query = "SELECT * FROM usuario WHERE login = '$login' AND senha = PASSOWORD('$senha')";
+        $query = "SELECT * FROM usuario WHERE login = '$login' AND senha = PASSWORD('$senha')";
         $conn = DB::getInstancia()->query($query);
         $resultado = $conn->fetchAll();
         return $resultado === 1;

@@ -31,7 +31,7 @@
             </div>            
             <div class="conteudo">
                 <h2>Login</h2>
-                <form id="formulario-login" action="../controller/loginBO.php">
+                <form id="formulario-login" action="../controller/loginBO.php" method="post">
                     <label for="usuario">Usuário:</label>
                     <input type="text" id="usuario" name="usuario">
                     <br><br>
