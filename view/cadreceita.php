@@ -1,12 +1,11 @@
-<!-- index.html -->
+<!-- cadastro.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="./favicon.png" type="image/png">
-  <title>Doceria Dark Moon</title>
- 
+  <title>Cadastro - Doceria Dark Moon</title>
   <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
@@ -27,13 +26,19 @@
     </div>
     <div class="container">
       <div class="menu-lateral">
-          <?php
-            include_once './menu.php';
-          ?>
-      </div>
+        <?php
+          include_once './menu.php';
+        ?>
+      </div>      
       <div class="conteudo">
-        <h2>Bem-vindo à Doceria Dark Moon!</h2>
-        <p>Aqui você encontrará os melhores doces e sobremesas.</p>
+          <h2>Cadastro de receitas</h2>
+          <form action="#" method="post">
+          <label>Nome:</label>
+          <input type="text" name="txtnome"><br><br>
+          <input type="hidden" name="acao" value="inserir"/>
+          <input type="submit" name="btnCadastrar" value="Cadastrar"/>
+          <input type="reset" name="btnLimpar" value="Limpar"/>
+        </form>
       </div>
     </div>
     <div class="rodape">

@@ -6,7 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="./favicon.png" type="image/png">
   <title>Doceria Dark Moon</title>
-  
+  <?php 
+  include_once '../model/Login.php';
+  Login::verificaSessao();
+  ?>
   <script type="text/javascript">
       function deletar(idingredientes){
           if(confirm('deseja excluir o registro?')){
@@ -29,17 +32,16 @@
       </div>
     </div>
     <div class="menu-horizontal">
-      <ul>
-          <li><a href="principal.php">Início</a></li>
-        <li><a href="#">Login</a></li>
-      </ul>
+        <?php
+            include_once './menulateral.php';
+        ?>
     </div>
     <div class="container">
       <div class="menu-lateral">
         <ul>
-          <li><a href="listaingredientes.php">Ingredientes</a></li>
-          <li><a href="#">Receitas</a></li>
-          <li><a href="#">Sair</a></li>
+            <?php
+                include_once './menu.php';
+            ?>         
         </ul>
       </div>
       <div class="conteudo">

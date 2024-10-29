@@ -2,9 +2,9 @@
 include_once '../model/Ingrediente.php';
 include_once '../model/database/IngredienteDAO.php';
 
-if (isset($_REQUEST['acao'])){//verifica se o hidden chegou
+if (isset($_REQUEST['acao'])){ //verifica se o hidden chegou
 
-$acao = $_REQUEST['acao'];//utiliza $POST e $GET
+$acao = $_REQUEST['acao'];
     
     switch ($acao) {
         case 'inserir':
@@ -40,33 +40,41 @@ $acao = $_REQUEST['acao'];//utiliza $POST e $GET
             }
             break;
         case 'alterar':
-            if(isset($_POST['idingredientes']) && isset($_POST['txtnome']) && !empty($_POST['txtnome'])){
-                $dao = new IngredienteDAO();
-                $objeto = new Ingrediente();
-                $objeto->idingredientes = $_POST['idingredientes'];
-                $objeto->descricao = $_POST['txtnome'];
-                if($dao->update($objeto)){
+            if (isset($_POST['idingredientes'])
+                && isset($_POST['txtnome'])
+                && !empty($_POST['txtnome'])){
+                    $dao = new IngredienteDAO();
+                    $objeto = new Ingrediente();
+                    $objeto->idingredientes = $_POST['idingredientes'];
+                    $objeto->descricao = $_POST['txtnome'];
+                    if($dao->update($objeto)){
                     ?>
-                    <script type="text/javascript">
-                        alert('Ingrediente alterado com sucesso.');
-                        location.href = '../view/listaingredientes.php';
-                    </script>
+                        <script type="text/javascript">
+                            alert('Ingrediente alterado com sucesso.');
+                            location.href = '../view/listaingredientes.php';
+                        </script>
                     <?php
-                }else{
+                    }else{
                     ?>
+                        <script type="text/javascript">
+                            alert('Problema ao alterar o ingrediente');
+                            history.go(-1);
+                        </script>    
+                    <?php
+                    }
+                }else{
+                ?>
                     <script type="text/javascript">
-                        alert('Problema ao alterar ingrediente');
+                        alert('Prencha o campo adequadamente.');
                         history.go(-1);
                     </script>
-                    <?php
+                <?php
                 }
-            }
             break;
         case 'deletar':
-            if(isset($_GET['idingredientes'])){
-                $id = $_GET['idingredientes'];
+            if (isset($_GET['idingredientes'])){
                 $dao = new IngredienteDAO();
-
+                $id = $_GET['idingredientes'];
                 if($dao->delete($id)){
                     ?>
                     <script type="text/javascript">
@@ -77,7 +85,7 @@ $acao = $_REQUEST['acao'];//utiliza $POST e $GET
                 }else{
                     ?>
                     <script type="text/javascript">
-                        alert('Problema ao excluir ingrediente');
+                        alert('Problema ao excluir o ingrediente.');
                         history.go(-1);
                     </script>
                     <?php
@@ -85,9 +93,8 @@ $acao = $_REQUEST['acao'];//utiliza $POST e $GET
             }
             break;
         default:
-
             break;
- 
+
             }        
 }       
 
