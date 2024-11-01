@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./favicon.png" type="image/png">
     <title>Doceria Dark Moon - Lista de Itens para Receita</title>
+        <?php 
+  include_once '../model/Login.php';
+  Login::verificaSessao();
+  ?>
+    <script type="text/javascript">
+      function deletar(iditem){
+          if(confirm('deseja excluir o registro?')){
+              document.location.href='../controller/itemBO.php?acao=deletar&iditem='+iditem;
+          }
+      }
+  </script>
     <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
@@ -35,9 +46,10 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Receita</th>
+                            <th>Item</th>
                             <th>Ingrediente</th>
-                            <th>Quantidade</th>
+                            <th>Validade</th>
+                            <th>Valor</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -49,6 +61,7 @@
                             <td>Receita 1</td>
                             <td>Ingrediente 1</td>
                             <td>10</td>
+                            <td></td>
                             <td>
                                 <button name="btnalterar" onclick="location.href='upditem.php'">Alterar</button>
                             </td>
